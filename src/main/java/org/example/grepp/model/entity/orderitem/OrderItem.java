@@ -31,6 +31,7 @@ public class OrderItem extends BaseEntity {
     @JoinColumn(name = "PRODUCT_ID", nullable = false)
     private Product product;
 
+    @Enumerated(EnumType.STRING)
     @Column(name = "CATEGORY", length = 50, nullable = false)
     private Category category;
 

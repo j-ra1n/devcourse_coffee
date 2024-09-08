@@ -21,6 +21,8 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.List;
 
+import static org.example.grepp.model.entity.order.constant.OrderStatus.PENDING;
+
 @Slf4j
 @Service
 @Transactional(readOnly = true)
@@ -46,7 +48,7 @@ public class OrderService {
                 .email(request.getEmail())
                 .address(request.getAddress())
                 .postcode(request.getPostcode())
-                .orderStatus(OrderStatus.PENDING)
+                .orderStatus(PENDING)
                 .build();
         orderRepository.save(order);
 
@@ -76,7 +78,7 @@ public class OrderService {
         Order order = findByIdOrThrowOrderException(orderId);
 
         // 주문 상태가 배송중 or 배송완료 예외처리
-        if (!order.getOrderStatus().equals(OrderStatus.PENDING)) {
+        if (!order.getOrderStatus().equals(PENDING)) {
             throw new OrderException(ExceptionMessage.ORDER_STATUS_NOT_FENDING);
         }
 
@@ -110,7 +112,7 @@ public class OrderService {
         Order order = findByIdOrThrowOrderException(orderId);
 
         // 주문 상태가 배송중 or 배송완료 예외처리
-        if (!order.getOrderStatus().equals(OrderStatus.PENDING)) {
+        if (!order.getOrderStatus().equals(PENDING)) {
             throw new OrderException(ExceptionMessage.ORDER_STATUS_NOT_FENDING);
         }
 
@@ -134,7 +136,7 @@ public class OrderService {
         List<Order> orders = orderRepository.findOrdersByCreatedAtBetween(yesterdayAfternoon, todayBefore2pm);
 
         for (Order order : orders) {
-            if (order.getOrderStatus() == OrderStatus.PENDING) {
+            if (order.getOrderStatus() == PENDING) {
                 // 주문 상태를 '배송중'으로 변경
                 order.updateOrderStatus(OrderStatus.SHIPPING);
             }

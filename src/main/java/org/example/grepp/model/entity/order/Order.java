@@ -28,6 +28,7 @@ public class Order extends BaseEntity {
     @Column(name = "POSTCODE", length = 200, nullable = false)
     private String postcode;
 
+    @Enumerated(EnumType.STRING)
     @Column(name = "ORDER_STATUS", length = 50, nullable = false)
     private OrderStatus orderStatus;
 

@@ -22,6 +22,7 @@ public class Product extends BaseEntity {
     @Column(name = "PRODUCT_NAME", length = 20, nullable = false)
     private String productName;
 
+    @Enumerated(EnumType.STRING)
     @Column(name = "CATEGORY", length = 50, nullable = false)
     private Category category;
 
