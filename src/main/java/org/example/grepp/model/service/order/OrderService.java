@@ -22,6 +22,7 @@ import java.time.LocalTime;
 import java.util.List;
 
 import static org.example.grepp.model.entity.order.constant.OrderStatus.PENDING;
+import static org.example.grepp.model.entity.order.constant.OrderStatus.SHIPPING;
 
 @Slf4j
 @Service
@@ -136,9 +137,9 @@ public class OrderService {
         List<Order> orders = orderRepository.findOrdersByCreatedAtBetween(yesterdayAfternoon, todayBefore2pm);
 
         for (Order order : orders) {
-            if (order.getOrderStatus() == PENDING) {
+            if (order.getOrderStatus().equals(PENDING)) {
                 // 주문 상태를 '배송중'으로 변경
-                order.updateOrderStatus(OrderStatus.SHIPPING);
+                order.updateOrderStatus(SHIPPING);
             }
         }
     }
