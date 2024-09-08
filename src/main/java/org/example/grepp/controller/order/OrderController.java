@@ -12,7 +12,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.UUID;
 
 
 @Slf4j  // 로그 사용
@@ -41,7 +40,7 @@ public class OrderController {
 
     // 주문 메뉴 수정하기
     @PutMapping("/{orderId}")
-    public ResponseEntity<Void> updateOrderMenu(@PathVariable UUID orderId,
+    public ResponseEntity<Void> updateOrderMenu(@PathVariable Long orderId,
                                                 @Valid @RequestBody OrderUpdateRequest request) {
 
         orderService.updateOrderMenu(orderId, request);
@@ -51,7 +50,7 @@ public class OrderController {
 
     // 주문 삭제
     @DeleteMapping("/{orderId}")
-    public ResponseEntity<Void> deleteOrder(@PathVariable UUID orderId) {
+    public ResponseEntity<Void> deleteOrder(@PathVariable Long orderId) {
 
         orderService.deleteOrder(orderId);
         return ResponseEntity.ok().build();

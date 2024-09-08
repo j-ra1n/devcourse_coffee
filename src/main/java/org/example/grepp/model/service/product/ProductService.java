@@ -33,7 +33,6 @@ public class ProductService {
 
         // 상품 저장
         Product product = Product.builder()
-                .productId(UUID.randomUUID())
                 .productName(request.getProductName())
                 .category(request.getCategory())
                 .price(request.getPrice())
@@ -45,7 +44,7 @@ public class ProductService {
 
     // 상품 수정
     @Transactional
-    public void updateProduct(UUID productId, ProductUpdateRequest request) {
+    public void updateProduct(Long productId, ProductUpdateRequest request) {
 
         // 상품 조회
         Product product = findByIdOrThrowProductException(productId);
@@ -59,7 +58,7 @@ public class ProductService {
 
     // 상품 삭제
     @Transactional
-    public void deleteProduct(UUID productId) {
+    public void deleteProduct(Long productId) {
 
         // 상품 조회
         Product product = findByIdOrThrowProductException(productId);
@@ -76,7 +75,7 @@ public class ProductService {
 
 
     // 상품 조회 예외처리
-    public Product findByIdOrThrowProductException(UUID productId) {
+    public Product findByIdOrThrowProductException(Long productId) {
         return productRepository.findById(productId)
                 .orElseThrow(() -> {
                     log.warn(">>>> {} : {} <<<<", productId, ExceptionMessage.PRODUCT_NOT_FOUND);

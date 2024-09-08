@@ -16,7 +16,7 @@ import java.util.UUID;
 public class OrderItemRequest {
 
     @NotNull
-    private UUID productId;
+    private Long productId;
 
     @NotNull
     private int quantity;

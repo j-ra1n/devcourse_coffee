@@ -40,7 +40,7 @@ public class ProductController {
 
     // 상품 수정
     @PutMapping("/{productId}")
-    public ResponseEntity<Void> updateProduct(@PathVariable(name = "productId") UUID productId,
+    public ResponseEntity<Void> updateProduct(@PathVariable(name = "productId") Long productId,
                                               @Valid @RequestBody ProductUpdateRequest request) {
 
         productService.updateProduct(productId, request);
@@ -50,7 +50,7 @@ public class ProductController {
 
     // 상품 삭제
     @DeleteMapping("/{productId}")
-    public ResponseEntity<Void> deleteProduct(@PathVariable(name = "productId") UUID productId) {
+    public ResponseEntity<Void> deleteProduct(@PathVariable(name = "productId") Long productId) {
 
         productService.deleteProduct(productId);
 

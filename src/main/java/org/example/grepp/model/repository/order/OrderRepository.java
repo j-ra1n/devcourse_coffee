@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.UUID;
 
 @Repository
-public interface OrderRepository extends JpaRepository<Order, UUID> {
+public interface OrderRepository extends JpaRepository<Order, Long> {
 
     // 사용자의 이메일을 기준으로 주문 내역을 조회하는 메서드
     List<Order> findByEmail(String email);

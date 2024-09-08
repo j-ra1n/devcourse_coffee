@@ -5,6 +5,7 @@ import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.example.grepp.model.entity.product.constant.Category;
 
 @Getter
 @NoArgsConstructor
@@ -16,8 +17,7 @@ public class ProductRegisterRequest {
     private String productName;
 
     @NotNull
-    @Size(max = 50, message = "카테고리 50자 이내")
-    private String category;
+    private Category category;
 
     @NotNull
     private int price;

@@ -1,17 +1,12 @@
 package org.example.grepp.model.entity.order;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.example.grepp.model.entity.BaseEntity;
 import org.example.grepp.model.entity.order.constant.OrderStatus;
-
-import java.util.UUID;
 
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED) // 외부에서 객체 생성 못하도록 제한
@@ -20,8 +15,9 @@ import java.util.UUID;
 public class Order extends BaseEntity {
 
     @Id
-    @Column(name = "ORDER_ID", columnDefinition = "BINARY(16)", nullable = false)
-    private UUID orderId;
+    @Column(name = "ORDER_ID", nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long orderId;
 
     @Column(name = "EMAIL", length = 50, nullable = false)
     private String email;
@@ -36,7 +32,7 @@ public class Order extends BaseEntity {
     private OrderStatus orderStatus;
 
     @Builder
-    public Order(UUID orderId, String email, String address, String postcode, OrderStatus orderStatus) {
+    public Order(Long orderId, String email, String address, String postcode, OrderStatus orderStatus) {
         this.orderId = orderId;
         this.email = email;
         this.address = address;

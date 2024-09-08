@@ -13,7 +13,6 @@ import org.example.grepp.model.entity.orderitem.OrderItem;
 import org.example.grepp.model.entity.product.Product;
 import org.example.grepp.model.repository.order.OrderRepository;
 import org.example.grepp.model.repository.orderitem.OrderItemRepository;
-import org.example.grepp.model.repository.product.ProductRepository;
 import org.example.grepp.model.service.product.ProductService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -21,7 +20,6 @@ import org.springframework.transaction.annotation.Transactional;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.List;
-import java.util.UUID;
 
 @Slf4j
 @Service
@@ -45,7 +43,6 @@ public class OrderService {
 
         // 주문 저장
         Order order = Order.builder()
-                .orderId(UUID.randomUUID())
                 .email(request.getEmail())
                 .address(request.getAddress())
                 .postcode(request.getPostcode())
@@ -73,7 +70,7 @@ public class OrderService {
 
     // 주문 메뉴 수정하기
     @Transactional
-    public void updateOrderMenu(UUID orderId, OrderUpdateRequest request) {
+    public void updateOrderMenu(Long orderId, OrderUpdateRequest request) {
 
         // 주문 조회
         Order order = findByIdOrThrowOrderException(orderId);
@@ -107,7 +104,7 @@ public class OrderService {
 
     // 주문 취소
     @Transactional
-    public void deleteOrder(UUID orderId) {
+    public void deleteOrder(Long orderId) {
 
         // 주문 조회
         Order order = findByIdOrThrowOrderException(orderId);
@@ -147,7 +144,7 @@ public class OrderService {
 
 
     // 주문 조회 예외처리
-    public Order findByIdOrThrowOrderException(UUID orderId) {
+    public Order findByIdOrThrowOrderException(Long orderId) {
         return orderRepository.findById(orderId)
                 .orElseThrow(() -> {
                     log.warn(">>>> {} : {} <<<<", orderId, ExceptionMessage.ORDER_NOT_FOUND);

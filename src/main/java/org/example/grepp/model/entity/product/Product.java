@@ -1,16 +1,12 @@
 package org.example.grepp.model.entity.product;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.example.grepp.model.entity.BaseEntity;
-
-import java.util.UUID;
+import org.example.grepp.model.entity.product.constant.Category;
 
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED) // 외부에서 객체 생성 못하도록 제한
@@ -19,14 +15,15 @@ import java.util.UUID;
 public class Product extends BaseEntity {
 
     @Id
-    @Column(name = "PRODUCT_ID", columnDefinition = "BINARY(16)", nullable = false)
-    private UUID productId;
+    @Column(name = "PRODUCT_ID", nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long productId;
 
     @Column(name = "PRODUCT_NAME", length = 20, nullable = false)
     private String productName;
 
     @Column(name = "CATEGORY", length = 50, nullable = false)
-    private String category;
+    private Category category;
 
     @Column(name = "PRICE", nullable = false)
     private int price;
@@ -35,7 +32,7 @@ public class Product extends BaseEntity {
     private String description;
 
     @Builder
-    public Product(UUID productId, String productName, String category, int price, String description) {
+    public Product(Long productId, String productName, Category category, int price, String description) {
         this.productId = productId;
         this.productName = productName;
         this.category = category;
@@ -43,7 +40,7 @@ public class Product extends BaseEntity {
         this.description = description;
     }
 
-    public void updateProduct(String productName, String category, int price, String description) {
+    public void updateProduct(String productName, Category category, int price, String description) {
         this.productName = productName;
         this.category = category;
         this.price = price;
