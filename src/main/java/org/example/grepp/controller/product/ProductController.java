@@ -7,6 +7,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.example.grepp.controller.product.request.ProductRegisterRequest;
 import org.example.grepp.controller.product.request.ProductUpdateRequest;
 import org.example.grepp.model.entity.product.Product;
+import org.example.grepp.model.entity.product.constant.Category;
 import org.example.grepp.model.service.product.ProductService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -59,7 +60,7 @@ public class ProductController {
 
     // 카테고리별 상품 조회
     @GetMapping("/category/{category}")
-    public ResponseEntity<List<Product>> readProductsByCategory(@PathVariable String category) {
+    public ResponseEntity<List<Product>> readProductsByCategory(@PathVariable Category category) {
 
         List<Product> products = productService.readProductsByCategory(category);
 

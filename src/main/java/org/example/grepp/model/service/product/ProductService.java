@@ -7,6 +7,7 @@ import org.example.grepp.common.exception.product.ProductException;
 import org.example.grepp.controller.product.request.ProductRegisterRequest;
 import org.example.grepp.controller.product.request.ProductUpdateRequest;
 import org.example.grepp.model.entity.product.Product;
+import org.example.grepp.model.entity.product.constant.Category;
 import org.example.grepp.model.repository.product.ProductRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -67,7 +68,7 @@ public class ProductService {
     }
 
     // 카테고리별 상품 조회
-    public List<Product> readProductsByCategory(String category) {
+    public List<Product> readProductsByCategory(Category category) {
 
         return productRepository.findByCategory(category);
     }
