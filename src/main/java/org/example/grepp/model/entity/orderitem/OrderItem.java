@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 import org.example.grepp.model.entity.BaseEntity;
 import org.example.grepp.model.entity.order.Order;
 import org.example.grepp.model.entity.product.Product;
+import org.example.grepp.model.entity.product.constant.Category;
 
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
@@ -31,7 +32,7 @@ public class OrderItem extends BaseEntity {
     private Product product;
 
     @Column(name = "CATEGORY", length = 50, nullable = false)
-    private String category;
+    private Category category;
 
     @Column(name = "PRICE", nullable = false)
     private int price;
@@ -40,7 +41,7 @@ public class OrderItem extends BaseEntity {
     private int quantity;
 
     @Builder
-    public OrderItem(Order order, Product product, String category, int price, int quantity) {
+    public OrderItem(Order order, Product product, Category category, int price, int quantity) {
         this.order = order;
         this.product = product;
         this.category = category;
